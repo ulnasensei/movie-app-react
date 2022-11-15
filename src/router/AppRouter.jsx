@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "react-bulma-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavbarComponent from "../components/navbar/Navbar";
 import Home from "../pages/Home";
@@ -11,7 +10,7 @@ const AppRouter = () => {
     return (
         <BrowserRouter>
             <NavbarComponent />
-            <Box id="main-content">
+            <div id="main-content">
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="/login" element={<Login />} />
@@ -20,7 +19,7 @@ const AppRouter = () => {
                     </Route>
                     <Route path="/tv/:id" element={<MovieDetails type={"tv"} />} />
                 </Routes>
-            </Box>
+            </div>
         </BrowserRouter>
     );
 };
