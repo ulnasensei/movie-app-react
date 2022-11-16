@@ -13,6 +13,7 @@ import {
     faCakeCandles,
     faSkull,
 } from "@fortawesome/free-solid-svg-icons";
+import "./MovieDetailCard.css";
 
 const MovieDetailCard = ({ type, movieID }) => {
     const [details, setDetails] = useState({});
@@ -30,7 +31,7 @@ const MovieDetailCard = ({ type, movieID }) => {
                 return (
                     <Box
                         style={{
-                            width: "90%",
+                            width: "75%",
                             height: "fit-content",
                         }}
                     >
@@ -142,7 +143,7 @@ const MovieDetailCard = ({ type, movieID }) => {
                 return (
                     <Box
                         style={{
-                            width: "90%",
+                            width: "75%",
                             height: "fit-content",
                         }}
                     >
@@ -259,7 +260,7 @@ const MovieDetailCard = ({ type, movieID }) => {
                 return (
                     <Box
                         style={{
-                            width: "90%",
+                            width: "75%",
                             height: "fit-content",
                         }}
                     >
