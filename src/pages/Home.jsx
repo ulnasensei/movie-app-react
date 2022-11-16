@@ -26,7 +26,7 @@ const Home = () => {
     }, []);
     const fetchMovies = () => {
         if (movies.results) {
-            const items = movies.results.slice(0, 8);
+            const items = movies.results.slice(0, 10);
             return items.map((item) => {
                 return <MovieCard item={item} key={item.id} />;
             });
@@ -34,7 +34,7 @@ const Home = () => {
     };
     const fetchTV = () => {
         if (tv.results) {
-            const items = tv.results.slice(0, 8);
+            const items = tv.results.slice(0, 10);
             return items.map((item) => {
                 return <MovieCard item={item} key={item.id} />;
             });
@@ -42,7 +42,7 @@ const Home = () => {
     };
     const fetchPerson = () => {
         if (people.results) {
-            const items = people.results.slice(0, 8);
+            const items = people.results.slice(0, 10);
             return items.map((item) => {
                 return <MovieCard item={item} key={item.id} />;
             });

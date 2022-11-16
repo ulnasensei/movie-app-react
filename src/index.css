@@ -3,7 +3,7 @@ body {
     margin: 0;
     font-family: "Montserrat", sans-serif;
     min-width: 100vw;
-    height: 10000px;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;

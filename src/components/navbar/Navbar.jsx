@@ -22,7 +22,7 @@ const NavbarComponent = () => {
     };
 
     return (
-        <Navbar color="link">
+        <Navbar color="link" style={{ paddingLeft: "2rem", paddingRight: "2rem" }}>
             <Navbar.Brand>
                 <Navbar.Item
                     renderAs="a"
