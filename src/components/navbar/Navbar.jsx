@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Navbar } from "react-bulma-components";
 import { useNavigate } from "react-router";
 import { useLoginContext } from "../../context/AuthContextProvider";
-import { toastError, toastSuccess } from "../../helpers/Toast";
+import { toastSuccess } from "../../helpers/Toast";
 
 const NavbarComponent = () => {
     const { user, setUser } = useLoginContext();
