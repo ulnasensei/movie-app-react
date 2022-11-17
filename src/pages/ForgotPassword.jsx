@@ -12,7 +12,7 @@ const ForgotPassword = () => {
         e.preventDefault();
         const { email } = e.target;
         resetPassword(email.value);
-        navigate("/");
+        navigate("/login");
     };
     useEffect(() => {
         if (user) {
