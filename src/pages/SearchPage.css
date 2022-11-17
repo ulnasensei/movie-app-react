@@ -1,0 +1,25 @@
+.search-result {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.result {
+    width: 90%;
+    height: fit-content;
+}
+.cardContainer {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.card {
+    margin: 1.3rem !important;
+}
+.card-image .image {
+    width: 250px;
+    max-height: 375px;
+}

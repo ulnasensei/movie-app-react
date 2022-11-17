@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Form, Heading } from "react-bulma-components";
+import { Box, Heading } from "react-bulma-components";
 import MovieCard from "../components/movieCard/MovieCard";
-import { useLoginContext } from "../context/AuthContextProvider";
-import { toastError } from "../helpers/Toast";
+import SearchForm from "../components/searchForm/SearchForm";
 import "./Home.css";
 
 const Home = () => {
-    const { user } = useLoginContext();
     const [movies, setMovies] = useState({});
     const [tv, setTV] = useState({});
     const [people, setPeople] = useState({});
@@ -48,39 +46,9 @@ const Home = () => {
             });
         }
     };
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(e.target.query.value, e.target.type.value);
-        if (user) {
-            //do stuff
-        } else {
-            toastError("You need to login to search!");
-        }
-    };
     return (
         <div className="populars">
-            <Box className="searchBox">
-                <form onSubmit={handleSubmit}>
-                    <Form.Field kind="group">
-                        <Form.Control>
-                            <Form.Input placeholder="Search..." required name="query" />
-                        </Form.Control>
-                        <Form.Control>
-                            <Form.Select name="type">
-                                <option value="movie">Movie</option>
-                                <option value="tv">TV</option>
-                                <option value="person">Person</option>
-                                <option value="multi">All</option>
-                            </Form.Select>
-                        </Form.Control>
-                    </Form.Field>
-                    <Form.Field>
-                        <Button fullwidth color={"info"} submit>
-                            Search
-                        </Button>
-                    </Form.Field>
-                </form>
-            </Box>
+            <SearchForm />
             <Box textAlign={"left"} className="popular">
                 <Heading>Popular Movies</Heading>
                 <div className="cardContainer">{fetchMovies()}</div>

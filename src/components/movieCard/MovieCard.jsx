@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Content, Heading } from "react-bulma-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays, faFilm } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays, faFilm, faIdBadge, faUser, faTv } from "@fortawesome/free-solid-svg-icons";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const MovieCard = ({ item }) => {
     const type = item.media_type;
     const percentage = Math.trunc((item?.vote_average || 0) * 10);
+    const [info, setInfo] = useState({});
     const getColor = (value) => {
         var hue = ((value / 100) * 120).toString(10);
         return ["hsl(", hue, ",100%,50%)"].join("");
@@ -16,10 +17,15 @@ const MovieCard = ({ item }) => {
     const extractInfo = (item) => {
         if (type === "person") {
             return {
+                icon: (
+                    <>
+                        <FontAwesomeIcon icon={faUser} /> &nbsp;
+                    </>
+                ),
                 name: item.name,
                 info: (
                     <>
-                        <FontAwesomeIcon icon={faFilm} />
+                        <FontAwesomeIcon icon={faIdBadge} />
                         &nbsp; {item.known_for_department}
                     </>
                 ),
@@ -29,6 +35,11 @@ const MovieCard = ({ item }) => {
         }
         if (type === "movie") {
             return {
+                icon: (
+                    <>
+                        <FontAwesomeIcon icon={faFilm} /> &nbsp;
+                    </>
+                ),
                 name: item.title,
                 info: (
                     <>
@@ -42,6 +53,11 @@ const MovieCard = ({ item }) => {
         }
         if (type === "tv") {
             return {
+                icon: (
+                    <>
+                        <FontAwesomeIcon icon={faTv} /> &nbsp;
+                    </>
+                ),
                 name: item.name,
                 info: (
                     <>
@@ -54,7 +70,11 @@ const MovieCard = ({ item }) => {
             };
         }
     };
-    const info = extractInfo(item);
+    useEffect(() => {
+        setInfo(extractInfo(item));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <Link to={`/${type}/${info.id}`}>
             <Card style={{ width: 250, height: 500, margin: "auto" }}>
@@ -106,7 +126,7 @@ const MovieCard = ({ item }) => {
                 <Card.Content>
                     <Content>
                         <Heading size={6} style={{ height: "2rem" }}>
-                            {info.name}
+                            {info.icon} {info.name}
                         </Heading>
                         {info.info}
                     </Content>
