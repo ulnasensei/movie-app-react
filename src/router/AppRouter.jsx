@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavbarComponent from "../components/navbar/Navbar";
+import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import MovieDetails from "../pages/MovieDetails";
 import NotFound from "../pages/NotFound";
+import Register from "../pages/Register";
 import SearchPage from "../pages/SearchPage";
 import PrivateRouter from "./PrivateRouter";
 
@@ -16,6 +18,8 @@ const AppRouter = () => {
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/:type/:id" element={<PrivateRouter />}>
                         <Route path="" element={<MovieDetails />} />
                     </Route>

@@ -4,16 +4,17 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Block, Box, Button, Form } from "react-bulma-components";
 import { useLoginContext } from "../context/AuthContextProvider";
 import { useNavigate } from "react-router";
-import { toastSuccess, toastWarning } from "../helpers/Toast";
+import { toastWarning } from "../helpers/Toast";
+import { Link } from "react-router-dom";
+import { loginEmailUser, loginWithGoogle } from "../auth/firebase";
 
 const Login = () => {
-    const { user, setUser } = useLoginContext();
+    const { user } = useLoginContext();
     const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
-        setUser(true);
-        toastSuccess("Logged in.");
-        navigate("/");
+        const { email, password } = e.target;
+        loginEmailUser(email.value, password.value, navigate);
     };
     useEffect(() => {
         if (user) {
@@ -54,14 +55,29 @@ const Login = () => {
                     </Button>
                 </Button.Group>
             </form>
-            <div className="divider">OR LOGIN WITH</div>
             <Button.Group>
-                <Button color={"white-bis"} fullwidth>
-                    <FontAwesomeIcon icon={faGoogle} /> &nbsp; Google
+                <Button
+                    color={"secondary"}
+                    type="button"
+                    fullwidth
+                    style={{ marginTop: "0.3rem" }}
+                    onClick={() => {
+                        navigate("/forgot-password");
+                    }}
+                >
+                    Forgot Password
+                </Button>
+            </Button.Group>
+            <div className="strike">
+                <span>OR</span>
+            </div>
+            <Button.Group>
+                <Button color={"white-bis"} fullwidth onClick={() => loginWithGoogle(navigate)}>
+                    <FontAwesomeIcon icon={faGoogle} /> &nbsp; Continue with Google
                 </Button>
             </Button.Group>
             <Block>
-                Don't have an account? <a href="/register">Register</a>
+                Don't have an account? <Link to="/register">Register</Link>
             </Block>
         </Box>
     );

@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import { Navbar } from "react-bulma-components";
+import { Image, Navbar } from "react-bulma-components";
 import { useNavigate } from "react-router";
 import { useLoginContext } from "../../context/AuthContextProvider";
-import { toastSuccess } from "../../helpers/Toast";
+import { logout } from "../../auth/firebase";
 
 const NavbarComponent = () => {
-    const { user, setUser } = useLoginContext();
+    const { user } = useLoginContext();
     const [burger, setBurger] = useState(false);
 
     const navigate = useNavigate();
 
-    const logout = (e) => {
+    const handleLogout = (e) => {
         e.preventDefault();
-        toastSuccess("Logged out.");
-        setUser(false);
-        navigate("/");
+        logout();
     };
     const login = (e) => {
         e.preventDefault();
@@ -48,9 +46,21 @@ const NavbarComponent = () => {
             <Navbar.Menu className={burger ? "is-active" : ""}>
                 <Navbar.Container align="right">
                     {user ? (
-                        <Navbar.Item hoverable={true} onClick={(e) => logout(e)} textWeight="bold">
-                            Logout
-                        </Navbar.Item>
+                        <>
+                            <Navbar.Item>
+                                <Image
+                                    src={user.photoURL}
+                                    style={{ width: "32px", height: "32px" }}
+                                    rounded
+                                    referrerPolicy="no-referrer"
+                                />
+                                &nbsp;&nbsp;
+                                {user.displayName}
+                            </Navbar.Item>
+                            <Navbar.Item hoverable={true} onClick={handleLogout} textWeight="bold">
+                                Logout
+                            </Navbar.Item>
+                        </>
                     ) : (
                         <Navbar.Item hoverable={true} onClick={(e) => login(e)} textWeight="bold">
                             Login
