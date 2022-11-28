@@ -13,6 +13,7 @@ const NavbarComponent = () => {
     const handleLogout = (e) => {
         e.preventDefault();
         logout();
+        navigate("/");
     };
     const login = (e) => {
         e.preventDefault();

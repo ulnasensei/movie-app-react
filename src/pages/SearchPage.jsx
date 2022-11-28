@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Heading } from "react-bulma-components";
 import { useParams } from "react-router-dom";
+import Flex from "../components/flex/Flex";
 import MovieCard from "../components/movieCard/MovieCard";
 import SearchForm from "../components/searchForm/SearchForm";
 import "./SearchPage.css";
@@ -41,15 +42,19 @@ const SearchPage = () => {
     };
 
     return (
-        <div className="search-result">
-            <SearchForm />
-            <Box textAlign={"left"} className="result">
-                <Heading>
-                    {params.query ? `Search results for: ${params.query}` : "Search for something."}
-                </Heading>
-                <div className="cardContainer">{displayResults()}</div>
-            </Box>
-        </div>
+        <Flex height={Boolean(result.results)}>
+            <div className="search-result">
+                <SearchForm />
+                <Box textAlign={"left"} className="result">
+                    <Heading>
+                        {params.query
+                            ? `Search results for: ${params.query}`
+                            : "Search for something."}
+                    </Heading>
+                    <div className="cardContainer">{displayResults()}</div>
+                </Box>
+            </div>
+        </Flex>
     );
 };
 

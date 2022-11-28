@@ -24,8 +24,8 @@ const Home = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const fetchDummyCards = () => {
-        return Array.from(Array(10)).map(() => {
-            return <DummyCard key={Date.now()} />;
+        return Array.from("0123456789").map((k) => {
+            return <DummyCard key={k} />;
         });
     };
     const fetchMovies = () => {
@@ -35,37 +35,43 @@ const Home = () => {
         });
     };
     const fetchTV = () => {
-        if (tv.results) {
-            const items = tv.results.slice(0, 10);
-            return items.map((item) => {
-                return <MovieCard item={item} key={item.id} />;
-            });
-        }
+        const items = tv.results.slice(0, 10);
+        return items.map((item) => {
+            return <MovieCard item={item} key={item.id} />;
+        });
     };
     const fetchPerson = () => {
-        if (people.results) {
-            const items = people.results.slice(0, 10);
-            return items.map((item) => {
-                return <MovieCard item={item} key={item.id} />;
-            });
-        }
+        const items = people.results.slice(0, 10);
+        return items.map((item) => {
+            return <MovieCard item={item} key={item.id} />;
+        });
     };
     return (
         <div className="populars">
             <SearchForm />
             <Box textAlign={"left"} className="popular">
                 <Heading>Popular Movies</Heading>
-                <div className="cardContainer">
-                    {movies.results ? fetchMovies() : fetchDummyCards()}
-                </div>
+                {movies.results ? (
+                    <div className="cardContainer">{fetchMovies()}</div>
+                ) : (
+                    <div className="cardContainer">{fetchDummyCards()}</div>
+                )}
             </Box>
             <Box textAlign={"left"} className="popular">
                 <Heading>Popular TV Shows</Heading>
-                <div className="cardContainer">{fetchTV()}</div>
+                {tv.results ? (
+                    <div className="cardContainer">{fetchTV()}</div>
+                ) : (
+                    <div className="cardContainer">{fetchDummyCards()}</div>
+                )}
             </Box>
             <Box textAlign={"left"} className="popular">
                 <Heading>Popular People</Heading>
-                <div className="cardContainer">{fetchPerson()}</div>
+                {people.results ? (
+                    <div className="cardContainer">{fetchPerson()}</div>
+                ) : (
+                    <div className="cardContainer">{fetchDummyCards()}</div>
+                )}
             </Box>
         </div>
     );
