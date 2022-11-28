@@ -7,9 +7,10 @@ import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
 
 const MovieCard = ({ item }) => {
+    const [info, setInfo] = useState({});
     const type = item.media_type;
     const percentage = Math.trunc((item?.vote_average || 0) * 10);
-    const [info, setInfo] = useState({});
+
     const getColor = (value) => {
         var hue = ((value / 100) * 120).toString(10);
         return ["hsl(", hue, ",100%,50%)"].join("");
